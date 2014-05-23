@@ -1,7 +1,7 @@
 easypost-ios
 ============
 
-Simple implementation of the EasyPost API for iOS. Generates postage easily
+Simple implementation of the EasyPost API for iOS. Generate postage easily.
 
 
 
