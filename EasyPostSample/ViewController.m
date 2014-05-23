@@ -40,7 +40,6 @@
                                            @"steve@apple.com",@"address[email]",
                                            nil];
     
-    
     NSMutableDictionary *toDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          @"Bill Gates",@"address[name]",
                                          @"",@"address[company]",
@@ -92,13 +91,6 @@
                       if (returnData && !error) {
                           UIImage *image = [UIImage imageWithData:returnData];
                           me.postImage.image = image;
-                          
-                          NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                          NSString *documentsDirectory = [paths objectAtIndex:0];
-                          NSString *postageFilePath = [documentsDirectory stringByAppendingPathComponent:@"sample.png"];
-                          [returnData writeToFile:postageFilePath atomically:YES];
-                          
-                          
                       } else {
                         NSLog(@"Error downloading postage = %@", error);
                       }
