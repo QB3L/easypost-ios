@@ -24,10 +24,10 @@
                                 <rect key="frame" x="80" y="248" width="160" height="72"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Generating..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SE-iy-iOX">
-                                        <rect key="frame" x="31" y="46" width="99" height="21"/>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Creating shipment..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6SE-iy-iOX">
+                                        <rect key="frame" x="0.0" y="46" width="160" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
@@ -43,6 +43,7 @@
                     </view>
                     <connections>
                         <outlet property="activity" destination="ndm-Q9-6Kr" id="Vjx-a7-DY9"/>
+                        <outlet property="activityMessage" destination="6SE-iy-iOX" id="jLl-v1-U7n"/>
                         <outlet property="generatingView" destination="QUs-DA-say" id="wVg-yN-KhS"/>
                         <outlet property="postImage" destination="BMX-pM-K65" id="MBG-y1-eRb"/>
                     </connections>

@@ -29,7 +29,6 @@
 {
     NSMutableDictionary *fromDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                            @"Steve Jobs",@"address[name]",
-                                           @"",@"address[company]",
                                            @"1 Infinite Loop",@"address[street1]",
                                            @"",@"address[street2]",
                                            @"Cupertino",@"address[city]",
@@ -42,7 +41,6 @@
     
     NSMutableDictionary *toDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                                          @"Bill Gates",@"address[name]",
-                                         @"",@"address[company]",
                                          @"1 Microsoft Way",@"address[street1]",
                                          @"",@"address[street2]",
                                          @"Redmond",@"address[city]",
@@ -61,43 +59,59 @@
                                              nil];
     
     __weak ViewController *me = self;
+    me.activityMessage.text = @"Creating shipment...";
     [EasyPost getShipmentTo:toDictionary from:fromDictionary forParcel:parcelDictionary
       withCompletionHandler:^(NSError *error, NSDictionary *result) {
           NSLog(@"Result: %@",result);
           //Get rateId here
           NSArray *rates = [result valueForKey:@"rates"];
           NSString *shipmentId = [result valueForKey:@"id"];
-          if (rates.count > 0) {
+          if (error) {
+              me.activityMessage.text = @"Error found!";
+              [me.activity stopAnimating];
+              me.activity.hidden = YES;
+              NSLog(@"%@",error);
               
-              NSDictionary *firstRate = [rates objectAtIndex:0];
-              NSString *firstRateId = [firstRate valueForKey:@"id"];
-              
-              [EasyPost getPostageLabelForShipment:shipmentId atRate:firstRateId withCompletionHandler:^(NSError *error, NSDictionary *result) {
-                  [me.activity stopAnimating];
-                  me.generatingView.hidden = YES;
-                  if (error) {
-                      //Show some error
-                  } else {
-                      NSDictionary *postageDict = [result objectForKey:@"postage_label"];
-                      NSString *postageURL = [postageDict valueForKey:@"label_url"];
-                      NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postageURL]];
-                      NSError *error = nil;
-                      //Data returned is a txt file
-                      NSHTTPURLResponse* response = nil;
-                    
-                      //Using synchronous request for convenience
-                      NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-                      
-                      if (returnData && !error) {
-                          UIImage *image = [UIImage imageWithData:returnData];
-                          me.postImage.image = image;
-                      } else {
-                        NSLog(@"Error downloading postage = %@", error);
-                      }
-                  }
-              }];
           } else {
-              NSLog(@"No rates found!");
+              
+              if (rates.count > 0) {
+                  NSDictionary *firstRate = [rates objectAtIndex:0];
+                  NSString *firstRateId = [firstRate valueForKey:@"id"];
+                  me.activityMessage.text = @"Generating label...";
+                  [EasyPost getPostageLabelForShipment:shipmentId atRate:firstRateId withCompletionHandler:^(NSError *error, NSDictionary *result) {
+                      [me.activity stopAnimating];
+                      me.generatingView.hidden = YES;
+                      if (error) {
+                          //Show some error
+                          me.activityMessage.text = @"Error found!";
+                          [me.activity stopAnimating];
+                          me.activity.hidden = YES;
+                          NSLog(@"Error = %@",error);
+                      } else {
+                          NSDictionary *postageDict = [result objectForKey:@"postage_label"];
+                          NSString *postageURL = [postageDict valueForKey:@"label_url"];
+                          NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:postageURL]];
+                          NSError *error = nil;
+                          //Data returned is a txt file
+                          NSHTTPURLResponse* response = nil;
+                          
+                          //Using synchronous request for convenience
+                          NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+                          
+                          if (returnData && !error) {
+                              UIImage *image = [UIImage imageWithData:returnData];
+                              me.postImage.image = image;
+                          } else {
+                              NSLog(@"Error downloading postage = %@", error);
+                          }
+                      }
+                  }];
+              } else {
+                  me.activityMessage.text = @"No rates found!";
+                  [me.activity stopAnimating];
+                  me.activity.hidden = YES;
+                  NSLog(@"No rates found!");
+              }
           }
       }];
 }

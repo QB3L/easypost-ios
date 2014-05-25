@@ -11,6 +11,7 @@
 @interface ViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIView *generatingView;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
+@property (weak, nonatomic) IBOutlet UILabel *activityMessage;
 @property (weak, nonatomic) IBOutlet UIImageView *postImage;
 
 @end
