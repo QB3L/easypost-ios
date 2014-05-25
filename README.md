@@ -101,7 +101,7 @@ Usage
 
 3. Get image of postage!
 --------------------
-![easypost-ios](http://www.topbalancesoftware.com/apps/gitmedia/easypost_sample.png)
+![easypost-ios](http://www.topbalancesoftware.com/apps/gitmedia/easypost_sample.gif)
 
 
 
