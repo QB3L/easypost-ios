@@ -15,52 +15,13 @@
 
 @implementation ViewController
 
-- (void)viewDidLoad
-{
-    [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    _generatingView.hidden = NO;
-    [_activity startAnimating];
-    
-    
-}
 
-- (void)viewDidAppear:(BOOL)animated
+#pragma mark - Test methods
+- (void)quickLabel
 {
-    NSMutableDictionary *fromDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                           @"Steve Jobs",@"address[name]",
-                                           @"1 Infinite Loop",@"address[street1]",
-                                           @"",@"address[street2]",
-                                           @"Cupertino",@"address[city]",
-                                           @"CA",@"address[state]",
-                                           @"95014",@"address[zip]",
-                                           @"US",@"address[country]",
-                                           @"(408)974-5050",@"address[phone]",
-                                           @"steve@apple.com",@"address[email]",
-                                           nil];
-    
-    NSMutableDictionary *toDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                         @"Bill Gates",@"address[name]",
-                                         @"1 Microsoft Way",@"address[street1]",
-                                         @"",@"address[street2]",
-                                         @"Redmond",@"address[city]",
-                                         @"WA",@"address[state]",
-                                         @"98052",@"address[zip]",
-                                         @"US",@"address[country]",
-                                         @"(425)882-8080",@"address[phone]",
-                                         @"bill@microsoft.com",@"address[email]",
-                                         nil];
-    
-    NSMutableDictionary *parcelDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
-                                             @"8",@"parcel[length]",
-                                             @"6",@"parcel[width]",
-                                             @"5",@"parcel[height]",
-                                             @"10",@"parcel[weight]",
-                                             nil];
-    
     __weak ViewController *me = self;
     me.activityMessage.text = @"Creating shipment...";
-    [EasyPost getShipmentTo:toDictionary from:fromDictionary forParcel:parcelDictionary
+    [EasyPost getShipmentTo:me.toDictionary from:me.fromDictionary forParcel:me.parcelDictionary
       withCompletionHandler:^(NSError *error, NSDictionary *result) {
           NSLog(@"Result: %@",result);
           //Get rateId here
@@ -114,6 +75,53 @@
               }
           }
       }];
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+
+    
+    //Load test dictionaries
+    self.fromDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                           @"Steve Jobs",@"address[name]",
+                                           @"1 Infinite Loop",@"address[street1]",
+                                           @"",@"address[street2]",
+                                           @"Cupertino",@"address[city]",
+                                           @"CA",@"address[state]",
+                                           @"95014",@"address[zip]",
+                                           @"US",@"address[country]",
+                                           @"(408)974-5050",@"address[phone]",
+                                           @"steve@apple.com",@"address[email]",
+                                           nil];
+    
+    self.toDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                         @"Bill Gates",@"address[name]",
+                                         @"1 Microsoft Way",@"address[street1]",
+                                         @"",@"address[street2]",
+                                         @"Redmond",@"address[city]",
+                                         @"WA",@"address[state]",
+                                         @"98052",@"address[zip]",
+                                         @"US",@"address[country]",
+                                         @"(425)882-8080",@"address[phone]",
+                                         @"bill@microsoft.com",@"address[email]",
+                                         nil];
+    
+    self.parcelDictionary = [NSMutableDictionary dictionaryWithObjectsAndKeys:
+                                             @"8",@"parcel[length]",
+                                             @"6",@"parcel[width]",
+                                             @"5",@"parcel[height]",
+                                             @"10",@"parcel[weight]",
+                                             nil];
+    
+    
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    /******************TEST ZONE******************/
+    [self quickLabel];
+    
 }
 
 

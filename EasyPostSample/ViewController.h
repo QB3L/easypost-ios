@@ -13,5 +13,9 @@
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activity;
 @property (weak, nonatomic) IBOutlet UILabel *activityMessage;
 @property (weak, nonatomic) IBOutlet UIImageView *postImage;
+@property (strong, nonatomic) NSMutableDictionary *fromDictionary;
+@property (strong, nonatomic) NSMutableDictionary *toDictionary;
+@property (strong, nonatomic) NSMutableDictionary *parcelDictionary;
+@property (strong, nonatomic) NSMutableDictionary *shipmentDictionary;
 
 @end
