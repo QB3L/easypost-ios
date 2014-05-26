@@ -29,7 +29,7 @@
 - (void)createAddress
 {
     __weak ViewController *me = self;
-    me.activityMessage.text = @"Creating shipment...";
+    me.activityMessage.text = @"Creating address...";
     [me.activity startAnimating];
     [EasyPost getAddress:me.fromDictionary withCompletionHandler:^(NSError *error, NSDictionary *result) {
         if (error) {
@@ -37,6 +37,22 @@
         } else {
             [me.activity stopAnimating];
             me.activityMessage.text = @"Address created";
+            NSLog(@"result = %@",result);
+        }
+    }];
+}
+
+- (void)createParcel
+{
+    __weak ViewController *me = self;
+    me.activityMessage.text = @"Creating parcel...";
+    [me.activity startAnimating];
+    [EasyPost getParcel:me.parcelDictionary withCompletionHandler:^(NSError *error, NSDictionary *result) {
+        if (error) {
+            [me showError:error];
+        } else {
+            [me.activity stopAnimating];
+            me.activityMessage.text = @"Parcel created";
             NSLog(@"result = %@",result);
         }
     }];
@@ -138,7 +154,8 @@
 {
     /******************TEST ZONE******************/
     //[self quickLabel];
-    [self createAddress];
+    //[self createAddress];
+    [self createParcel];
     
 }
 

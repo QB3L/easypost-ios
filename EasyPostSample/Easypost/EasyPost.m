@@ -110,6 +110,11 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     [EasyPost requestServiceForParameters:addressDict atLink:@"https://api.easypost.com/v2/addresses" withHandler:completionHandler];
 }
 
++ (void)getParcel:(NSMutableDictionary *)parcelDict withCompletionHandler:(CompletionHandlerBlock)completionHandler
+{
+    [EasyPost requestServiceForParameters:parcelDict atLink:@"https://api.easypost.com/v2/parcels" withHandler:completionHandler];
+}
+
 
 + (void)getShipmentTo:(NSString *)toAddressId from:(NSString *)fromAddressId forParcel:(NSString *)parcelId customsInfo:(NSString *)customsId withCompletionHandler:(CompletionHandlerBlock)completionHandler
 {

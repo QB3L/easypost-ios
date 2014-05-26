@@ -21,6 +21,7 @@ typedef enum {
 @interface EasyPost : NSObject
 + (void)getPostageLabelForShipment:(NSString *)shipmentId atRate:(NSString *)rateId withCompletionHandler:(CompletionHandlerBlock)completionHandler;
 + (void)getAddress:(NSMutableDictionary *)addressDict withCompletionHandler:(CompletionHandlerBlock)successBlock;
++ (void)getParcel:(NSMutableDictionary *)parcelDict withCompletionHandler:(CompletionHandlerBlock)completionHandler;
 + (void)getShipmentTo:(NSString *)toAddressId from:(NSString *)fromAddressId forParcel:(NSString *)parcelId customsInfo:(NSString *)customsId withCompletionHandler:(CompletionHandlerBlock)completionHandler;
 + (void)getShipmentTo:(NSMutableDictionary *)toAddress from:(NSMutableDictionary *)fromAddress forParcel:(NSMutableDictionary *)parcelDictionary withCompletionHandler:(CompletionHandlerBlock)completionHandler;
 @end
