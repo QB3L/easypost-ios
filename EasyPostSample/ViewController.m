@@ -16,17 +16,28 @@
 @implementation ViewController
 
 
-#pragma mark - Test methods
+#pragma mark - Special Methods
+- (void)showError:(NSError *)error
+{
+    self.activityMessage.text = @"Error found!";
+    [self.activity stopAnimating];
+    self.activity.hidden = YES;
+    NSLog(@"%@",error);
+}
 
+#pragma mark - Test methods
 - (void)createAddress
 {
     __weak ViewController *me = self;
     me.activityMessage.text = @"Creating shipment...";
+    [me.activity startAnimating];
     [EasyPost getAddress:me.fromDictionary withCompletionHandler:^(NSError *error, NSDictionary *result) {
         if (error) {
-            
+            [me showError:error];
         } else {
-            
+            [me.activity stopAnimating];
+            me.activityMessage.text = @"Address created";
+            NSLog(@"result = %@",result);
         }
     }];
 }
@@ -42,11 +53,7 @@
           NSArray *rates = [result valueForKey:@"rates"];
           NSString *shipmentId = [result valueForKey:@"id"];
           if (error) {
-              me.activityMessage.text = @"Error found!";
-              [me.activity stopAnimating];
-              me.activity.hidden = YES;
-              NSLog(@"%@",error);
-              
+              [me showError:error];
           } else {
               
               if (rates.count > 0) {
@@ -57,11 +64,7 @@
                       [me.activity stopAnimating];
                       me.generatingView.hidden = YES;
                       if (error) {
-                          //Show some error
-                          me.activityMessage.text = @"Error found!";
-                          [me.activity stopAnimating];
-                          me.activity.hidden = YES;
-                          NSLog(@"Error = %@",error);
+                          [me showError:error];
                       } else {
                           NSDictionary *postageDict = [result objectForKey:@"postage_label"];
                           NSString *postageURL = [postageDict valueForKey:@"label_url"];
@@ -134,7 +137,8 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     /******************TEST ZONE******************/
-    [self quickLabel];
+    //[self quickLabel];
+    [self createAddress];
     
 }
 
