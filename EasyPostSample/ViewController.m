@@ -17,6 +17,20 @@
 
 
 #pragma mark - Test methods
+
+- (void)createAddress
+{
+    __weak ViewController *me = self;
+    me.activityMessage.text = @"Creating shipment...";
+    [EasyPost getAddress:me.fromDictionary withCompletionHandler:^(NSError *error, NSDictionary *result) {
+        if (error) {
+            
+        } else {
+            
+        }
+    }];
+}
+
 - (void)quickLabel
 {
     __weak ViewController *me = self;
