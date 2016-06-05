@@ -7,6 +7,7 @@
 //
 
 #import "EasyPost.h"
+#import "Base64Encoder.h"
 
 #if (TEST_VERSION)
 NSString * const APIKEY                                     = @""; //Test Key
@@ -14,29 +15,11 @@ NSString * const APIKEY                                     = @""; //Test Key
 NSString * const APIKEY                                     = @"";
 #endif
 NSString * const EasyPostServiceErrorDomain					= @"EasyPostServiceError";
-static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+
 
 @implementation EasyPost
 
 #pragma mark - Special Methods
-+ (NSString *)base64EncodeForData:(NSData *)dataToEncode;
-{
-    NSMutableString *dest = [[NSMutableString alloc] initWithString:@""];
-    unsigned char * working = (unsigned char *)[dataToEncode bytes];
-    int srcLen = [dataToEncode length];
-    for (int i=0; i<srcLen; i += 3) {
-        for (int nib=0; nib<4; nib++) {
-            int byt = (nib == 0)?0:nib-1;
-            int ix = (nib+1)*2;
-            if (i+byt >= srcLen) break;
-            unsigned char curr = ((working[i+byt] << (8-ix)) & 0x3F);
-            if (i+nib < srcLen) curr |= ((working[i+nib] >> ix) & 0x3F);
-            [dest appendFormat:@"%c", base64[curr]];
-        }
-    }
-    return dest;
-}
-
 + (void)requestServiceForParameters:(NSMutableDictionary *)paramsDictionary atLink:(NSString *)link withHandler:(CompletionHandlerBlock)completionHandler
 {
     NSMutableString *body = [NSMutableString stringWithCapacity:255];
@@ -56,7 +39,7 @@ static char base64[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123
     //Authorization
     NSString *authStr = [NSString stringWithFormat:@"%@:", APIKEY];
     NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
-    NSString *authValue = [NSString stringWithFormat:@"Basic %@=", [EasyPost base64EncodeForData:authData]];
+    NSString *authValue = [NSString stringWithFormat:@"Basic %@=", [Base64Encoder base64EncodeForData:authData]];
     [request setValue:authValue forHTTPHeaderField:@"Authorization"];
     
     //Finish request

@@ -20,6 +20,8 @@
 		458AB73D192CEE26008FBAB3 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458AB73C192CEE26008FBAB3 /* XCTest.framework */; };
 		458AB73E192CEE26008FBAB3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458AB71D192CEE25008FBAB3 /* Foundation.framework */; };
 		458AB73F192CEE26008FBAB3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458AB721192CEE25008FBAB3 /* UIKit.framework */; };
+		4F82BBBF1D034E3600E32EEC /* EasyPostSwift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F82BBBE1D034E3600E32EEC /* EasyPostSwift.swift */; };
+		4F82BBC21D03506B00E32EEC /* Base64Encoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F82BBC11D03506B00E32EEC /* Base64Encoder.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,10 @@
 		458AB735192CEE26008FBAB3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		458AB73B192CEE26008FBAB3 /* EasyPostSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EasyPostSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		458AB73C192CEE26008FBAB3 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		4F82BBBD1D034E3500E32EEC /* EasyPostSample-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EasyPostSample-Bridging-Header.h"; sourceTree = "<group>"; };
+		4F82BBBE1D034E3600E32EEC /* EasyPostSwift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyPostSwift.swift; sourceTree = "<group>"; };
+		4F82BBC01D03506B00E32EEC /* Base64Encoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64Encoder.h; sourceTree = "<group>"; };
+		4F82BBC11D03506B00E32EEC /* Base64Encoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64Encoder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +88,10 @@
 			children = (
 				4518613F192D43770024B35A /* EasyPost.h */,
 				45186140192D43770024B35A /* EasyPost.m */,
+				4F82BBBE1D034E3600E32EEC /* EasyPostSwift.swift */,
+				4F82BBBD1D034E3500E32EEC /* EasyPostSample-Bridging-Header.h */,
+				4F82BBC01D03506B00E32EEC /* Base64Encoder.h */,
+				4F82BBC11D03506B00E32EEC /* Base64Encoder.m */,
 			);
 			path = Easypost;
 			sourceTree = "<group>";
@@ -185,6 +195,7 @@
 		458AB712192CEE25008FBAB3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "TopBalance Software";
 				TargetAttributes = {
@@ -237,10 +248,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F82BBBF1D034E3600E32EEC /* EasyPostSwift.swift in Sources */,
 				458AB734192CEE26008FBAB3 /* ViewController.m in Sources */,
 				45186141192D43770024B35A /* EasyPost.m in Sources */,
 				458AB72E192CEE26008FBAB3 /* AppDelegate.m in Sources */,
 				458AB72A192CEE25008FBAB3 /* main.m in Sources */,
+				4F82BBC21D03506B00E32EEC /* Base64Encoder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,10 +369,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EasyPostSample/EasyPostSample-Prefix.pch";
 				INFOPLIST_FILE = "EasyPostSample/EasyPostSample-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyPostSample/Easypost/EasyPostSample-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -369,10 +386,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "EasyPostSample/EasyPostSample-Prefix.pch";
 				INFOPLIST_FILE = "EasyPostSample/EasyPostSample-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "EasyPostSample/Easypost/EasyPostSample-Bridging-Header.h";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
