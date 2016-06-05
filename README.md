@@ -10,6 +10,7 @@ Install
 
 1. Load all files under EasyPost folder in sample project to your own project.
 2. `#import "EasyPost.h"`
+3. Swift Version included as well in sample project.
 
 
 Usage
